@@ -1,5 +1,5 @@
 # CoffeeDream
-
+authors : Manon Bobin, Jeremy Bardon, David Perrai  
 ```
 POST http://coffeedream.com/auth
 IN
