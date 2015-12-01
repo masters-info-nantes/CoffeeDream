@@ -1,17 +1,9 @@
-# CoffeeDream
-## Authors 
-* Manon Bobin 
-* Jeremy Bardon
-* David Perrai
+# CoffeeDream | Gestion d'authentification de la machine à café
+authors : Manon Bobin, Jeremy Bardon, David Perrai  
 
-## Run project
+Stockage : MapDB pour le stockage des (IMEI,TOKEN) et (TOKEN,USERINFOS)
+l'insertion des données sera faite directement dans le code (pas d'url rest pour l'insertion).
 
-```
-$ mvn clean compile tomcat:run
-$ browser http://localhost:8080/coffeedream/test
-```
-
-## ReST API  
 ```
 POST http://coffeedream.com/auth
 IN
