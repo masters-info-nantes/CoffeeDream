@@ -14,7 +14,7 @@ public class AuthService {
 
 	@GET
 	@Path("/test")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_JSON)
 	public String test(){
 		return "coucou";
 	}
@@ -24,6 +24,7 @@ public class AuthService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response auth(String imei){
+		System.out.println("coucou");
 		ResponseAuth resp = new ResponseAuth("auth", "imei"+ imei);
 
 		if(true){
