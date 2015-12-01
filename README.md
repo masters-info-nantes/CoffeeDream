@@ -1,5 +1,17 @@
 # CoffeeDream
-authors : Manon Bobin, Jeremy Bardon, David Perrai  
+## Authors 
+* Manon Bobin 
+* Jeremy Bardon
+* David Perrai
+
+## Run project
+
+```
+$ mvn clean compile tomcat:run
+$ browser http://localhost:8080/coffeedream/test
+```
+
+## ReST API  
 ```
 POST http://coffeedream.com/auth
 IN
