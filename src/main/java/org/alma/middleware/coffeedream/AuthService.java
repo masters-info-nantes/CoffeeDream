@@ -23,9 +23,11 @@ public class AuthService {
 	@Path("/auth")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response auth(String imei){
-		System.out.println("coucou");
-		ResponseAuth resp = new ResponseAuth("auth", "imei"+ imei);
+	public Response auth(ResponseAuth imei){
+		ResponseAuth resp = new ResponseAuth("auth", new Object(){
+			public String monTest = "coucou";
+			public int lalal = 3;
+		});
 
 		if(true){
 			return Response.status(Response.Status.NOT_FOUND).entity(resp).build();
