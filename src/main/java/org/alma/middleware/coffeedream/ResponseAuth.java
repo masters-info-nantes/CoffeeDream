@@ -1,15 +1,17 @@
 package org.alma.middleware.coffeedream;
 
+import java.util.HashMap;
+
 public class ResponseAuth {
 
 	private String call;
-	private Object answer;
+	private HashMap<String, Object> answer;
 
 	public ResponseAuth(){
 		this("", null);
 	}
 
-	public ResponseAuth(String call, Object answer){
+	public ResponseAuth(String call, HashMap<String, Object> answer){
 		this.call = call;
 		this.answer = answer;
 	}
@@ -26,7 +28,7 @@ public class ResponseAuth {
 		return answer;
 	}
 
-	public void setAnswer(Object answer) {
+	public void setAnswer(HashMap<String, Object> answer) {
 		this.answer = answer;
 	}
 }
