@@ -1,12 +1,13 @@
 package org.alma.middleware.coffeedream.Bean;
 
+import java.io.Serializable;
+
 /**
  * Created by jeremy on 03/12/15.
  */
-public class UserBean {
+public class UserBean implements Serializable{
 
-    private int phoneNumber;
-
+    private String phoneNumber;
     private String firstName;
     private String lastName;
 
@@ -14,23 +15,27 @@ public class UserBean {
 
     }
 
-    public UserBean(int phoneNumber, String firstName, String lastName){
+    public UserBean(String phoneNumber, String firstName, String lastName){
         this.phoneNumber = phoneNumber;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public void setFirstName(String firstName) {

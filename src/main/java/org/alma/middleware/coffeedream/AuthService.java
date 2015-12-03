@@ -23,11 +23,11 @@ public class AuthService {
 
         //alimentation de la table d'identities
 
-        UserBean u1 = new UserBean(0600000,"TOTO", "TOTO");
-        UserBean u2 = new UserBean(0600000,"TATA", "TATA");
-        UserBean u3 = new UserBean(0600000,"TITI", "TITI");
-        UserBean u4 = new UserBean(0600000,"TYTY", "TYTY");
-        UserBean u5 = new UserBean(0600000,"TOTOR", "TOTOR");
+        UserBean u1 = new UserBean("0600000001","John", "Doe");
+        UserBean u2 = new UserBean("0600000002","jacky", "chan");
+        UserBean u3 = new UserBean("0600000003","TITI", "TITI");
+        UserBean u4 = new UserBean("0600000004","TYTY", "TYTY");
+        UserBean u5 = new UserBean("0600000005","TOTOR", "TOTOR");
 
         String imei1 = "123456789012345";
         String imei2 = "345678901234567";
