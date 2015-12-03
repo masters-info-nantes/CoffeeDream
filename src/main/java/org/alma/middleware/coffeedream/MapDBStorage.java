@@ -43,16 +43,20 @@ public class MapDBStorage {
 
     }
 
-    public String getToken(String imei) {
-       return this.authents.get(imei);
+    public String getImei(String token) {
+       return this.authents.get(token);
     }
 
-    public UserBean getUser(String token) {
-        return identities.get(token);
+    public UserBean getUserByToken(String token) {
+        return  getUser(getImei(token));
     }
 
-    public void putToken(String imei,String token) {
-        this.authents.put(imei,token);
+    public UserBean getUser(String imei) {
+        return identities.get(imei);
+    }
+
+    public void putToken(String token,String imei) {
+        this.authents.put(token,imei);
     }
 
     public void putUser(String imei,UserBean user) {
@@ -64,10 +68,11 @@ public class MapDBStorage {
     }
 
     public boolean containsImei(String imei) {
-        return authents.containsKey(imei);
+        return identities.containsKey(imei);
     }
+
     public boolean containsToken(String token) {
-        return identities.containsKey(token);
+        return authents .containsKey(token);
     }
 
 }
