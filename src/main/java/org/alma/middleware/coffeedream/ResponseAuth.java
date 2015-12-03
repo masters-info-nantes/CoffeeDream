@@ -1,19 +1,22 @@
 package org.alma.middleware.coffeedream;
 
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Map;
 
 public class ResponseAuth implements Serializable {
 
 	private String call;
-	private HashMap<String, Object> answer;
+
+    @JsonDeserialize
+	private HashMap<String, String> answer;
 
 	public ResponseAuth(){
-		this("", null);
+		this("",null);
 	}
 
-	public ResponseAuth(String call, HashMap<String, Object> answer){
+	public ResponseAuth(String call, HashMap<String, String> answer){
 		this.call = call;
 		this.answer = answer;
 	}
@@ -26,11 +29,11 @@ public class ResponseAuth implements Serializable {
 		this.call = call;
 	}
 
-	public Map<String, Object> getAnswer() {
+	public HashMap<String, String> getAnswer() {
 		return answer;
 	}
 
-	public void setAnswer(HashMap<String, Object> answer) {
+	public void setAnswer(HashMap<String, String> answer) {
 		this.answer = answer;
 	}
 }
