@@ -1,12 +1,13 @@
 package org.alma.middleware.coffeedream;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import org.mapdb.DB;
+import org.mapdb.DBMaker;
+
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.File;
+import java.util.concurrent.ConcurrentNavigableMap;
 
 @Path("")
 public class AuthService {
@@ -27,7 +28,14 @@ public class AuthService {
 		System.out.println("coucou");
 		ResponseAuth resp = new ResponseAuth("auth", "imei"+ imei);
 
-		if(true){
+        DB db = DBMaker.fileDB(new File("file.db"))
+                .closeOnJvmShutdown()
+                .transactionDisable()
+                .make();
+
+        ConcurrentNavigableMap<Integer,String> map = db.treeMap("collectionName");
+
+        if(true){
 			return Response.status(Response.Status.NOT_FOUND).entity(resp).build();
 		}
 		else {
