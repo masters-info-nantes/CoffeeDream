@@ -36,6 +36,7 @@ public class AuthService {
 		if(mapdb.containsImei(imeiNumber)){
 			String token = UUID.randomUUID().toString();
 			mapdb.putToken(token, imeiNumber);
+			mapdb.closeDB();
 
 			HashMap<String, Object> data = new HashMap<>();
 			data.put("token", token);
@@ -74,6 +75,7 @@ public class AuthService {
 
 		if(mapdb.containsToken(tokenNumber)){
 			UserBean user = mapdb.getUser(tokenNumber);
+			mapdb.closeDB();
 
 			HashMap<String, Object> data = new HashMap<>();
 			data.put("user", user);
