@@ -22,7 +22,7 @@ public class AuthService {
 	@Path("/auth")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResponseAuth auth(AuthentificationBeanJson authJson){
+	public Response auth(HashMap<String, Object> authJson){
 
 
 /*
@@ -35,23 +35,20 @@ public class AuthService {
         db.close();
 */
 
-        System.out.println(authJson.imei);
-        System.out.println(authJson.test);
-        int test = authJson.test;
+        int test = (Integer)authJson.get("test");
 
         HashMap<String, Object> data = new HashMap<>();
 		ResponseAuth resp = null;
 
-		System.out.println("test: "+test);
 		switch (test){
 			default:
 				data.put("token", "KUGFYTDLUHKJFIIOM");
 				data.put("callback", "http://localhost:8080/coffeedream/token");
 
 				resp = new ResponseAuth("auth", data);
-				return resp;
+				return Response.ok(resp, MediaType.APPLICATION_JSON).build();
 
-		/*	case 0:
+			case 0:
 				data.put("error", "Token not found for this IMEI");
 				resp = new ResponseAuth("auth", data);
 				return Response.status(Response.Status.NOT_FOUND).entity(resp).build();
@@ -60,7 +57,6 @@ public class AuthService {
 				data.put("error", "IMEI MAL FORMED");
 				resp = new ResponseAuth("auth", data);
 				return Response.status(Response.Status.NOT_FOUND).entity(resp).build();
-*/
 		}
 	}
 
