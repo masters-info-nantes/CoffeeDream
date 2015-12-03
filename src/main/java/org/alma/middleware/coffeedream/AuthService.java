@@ -48,6 +48,7 @@ public class AuthService {
 
 		// 4 - IMEI not found in user database
 		else {
+			mapdb.closeDB();
 			return makeError("auth", "Imei (" + imeiNumber + ") not found in user database");
 		}
 	}
@@ -86,6 +87,7 @@ public class AuthService {
 
 		// 4 - Token not found in database
 		else {
+			mapdb.closeDB();
 			return makeError("token", "Token (" + tokenNumber + ") not from this server.");
 		}
 	}

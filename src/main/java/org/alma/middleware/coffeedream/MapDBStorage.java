@@ -20,7 +20,6 @@ public class MapDBStorage {
 
     public MapDBStorage() {
         database = DBMaker.fileDB(new File("mapdb/authentification.db"))
-                .closeOnJvmShutdown()
                 .transactionDisable()
                 .make();
 
@@ -38,7 +37,7 @@ public class MapDBStorage {
 
         } else {
             identities = database.treeMapCreate("identities")
-                    .keySerializer(Serializer.LONG)
+                    .keySerializer(Serializer.STRING)
                     .makeOrGet();
         }
 
