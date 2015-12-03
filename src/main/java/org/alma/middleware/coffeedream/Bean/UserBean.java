@@ -1,4 +1,4 @@
-package org.alma.middleware.coffeedream;
+package org.alma.middleware.coffeedream.Bean;
 
 /**
  * Created by jeremy on 03/12/15.
