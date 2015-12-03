@@ -1,43 +1,45 @@
 package org.alma.middleware.coffeedream;
 
-import org.mapdb.DB;
-import org.mapdb.DBMaker;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.File;
 import java.util.HashMap;
-import java.util.concurrent.ConcurrentNavigableMap;
 
 
 @Path("")
 public class AuthService {
 
 
+
 	@GET
-	@Path("/test")
+	@Path("/test/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String test(){
-		return "coucou";
-	}
+	public void test(@PathParam("name") String name){
+        System.out.println("coucou");
+    }
 
 	@POST
 	@Path("/auth")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response auth(@PathParam("imei") String imei, @PathParam("test") int test){
+	public ResponseAuth auth(AuthentificationBeanJson authJson){
 
 
-        DB db = DBMaker.fileDB(new File("file.db"))
+/*
+        DB db = DBMaker.newFileDB(new File("file.db"))
                 .closeOnJvmShutdown()
                 .transactionDisable()
                 .make();
 
-        ConcurrentNavigableMap<Integer,String> map = db.treeMap("collectionName");
+        ConcurrentNavigableMap<Integer,String> map = db.getTreeMap("collectionName");
+        db.close();
+*/
 
+        System.out.println(authJson.imei);
+        System.out.println(authJson.test);
+        int test = authJson.test;
 
-		HashMap<String, Object> data = new HashMap<>();
+        HashMap<String, Object> data = new HashMap<>();
 		ResponseAuth resp = null;
 
 		System.out.println("test: "+test);
@@ -47,9 +49,9 @@ public class AuthService {
 				data.put("callback", "http://localhost:8080/coffeedream/token");
 
 				resp = new ResponseAuth("auth", data);
-				return Response.ok(resp, MediaType.APPLICATION_JSON).build();
+				return resp;
 
-			case 0:
+		/*	case 0:
 				data.put("error", "Token not found for this IMEI");
 				resp = new ResponseAuth("auth", data);
 				return Response.status(Response.Status.NOT_FOUND).entity(resp).build();
@@ -58,7 +60,7 @@ public class AuthService {
 				data.put("error", "IMEI MAL FORMED");
 				resp = new ResponseAuth("auth", data);
 				return Response.status(Response.Status.NOT_FOUND).entity(resp).build();
-
+*/
 		}
 	}
 

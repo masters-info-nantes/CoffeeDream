@@ -1,8 +1,10 @@
 package org.alma.middleware.coffeedream;
 
+import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 
-public class ResponseAuth {
+public class ResponseAuth implements Serializable {
 
 	private String call;
 	private HashMap<String, Object> answer;
@@ -24,7 +26,7 @@ public class ResponseAuth {
 		this.call = call;
 	}
 
-	public Object getAnswer() {
+	public Map<String, Object> getAnswer() {
 		return answer;
 	}
 
