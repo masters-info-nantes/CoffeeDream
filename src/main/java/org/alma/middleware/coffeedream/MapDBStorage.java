@@ -64,4 +64,11 @@ public class MapDBStorage {
         database.close();
     }
 
+    public boolean containsImei(String imei) {
+        return authents.containsKey(imei);
+    }
+    public Boolean containsToken(String token) {
+        return identities.containsKey(token);
+    }
+
 }
