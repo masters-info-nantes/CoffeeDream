@@ -22,12 +22,12 @@ public class AuthService {
         MapDBStorage mapdb = new MapDBStorage();
 
         //alimentation de la table d'identities
-
-        UserBean u1 = new UserBean("0600000001","John", "Doe");
-        UserBean u2 = new UserBean("0600000002","jacky", "chan");
-        UserBean u3 = new UserBean("0600000003","TITI", "TITI");
-        UserBean u4 = new UserBean("0600000004","TYTY", "TYTY");
-        UserBean u5 = new UserBean("0600000005","TOTOR", "TOTOR");
+    try {
+        UserBean u1 = new UserBean("0600000001", "John", "Doe");
+        UserBean u2 = new UserBean("0600000002", "jacky", "chan");
+        UserBean u3 = new UserBean("0600000003", "TITI", "TITI");
+        UserBean u4 = new UserBean("0600000004", "TYTY", "TYTY");
+        UserBean u5 = new UserBean("0600000005", "TOTOR", "TOTOR");
 
         String imei1 = "123456789012345";
         String imei2 = "345678901234567";
@@ -35,13 +35,15 @@ public class AuthService {
         String imei4 = "678901234566789";
         String imei5 = "098765432112345";
 
-        mapdb.putUser(imei1,u1);
-        mapdb.putUser(imei2,u2);
-        mapdb.putUser(imei3,u3);
-        mapdb.putUser(imei4,u4);
-        mapdb.putUser(imei5,u5);
+        mapdb.putUser(imei1, u1);
+        mapdb.putUser(imei2, u2);
+        mapdb.putUser(imei3, u3);
+        mapdb.putUser(imei4, u4);
+        mapdb.putUser(imei5, u5);
 
+    } finally {
         mapdb.closeDB();
+    }
 
     }
 
@@ -63,28 +65,31 @@ public class AuthService {
 			return makeError("auth", "Imei (" + imeiNumber + ") malformed. It contains " + imeiNumber.length() + " characters instead of 15.");
 		}
 
-		// 3 - IMEI found in user database
-		MapDBStorage mapdb = new MapDBStorage();
+            // 3 - IMEI found in user database
+            MapDBStorage mapdb = new MapDBStorage();
+        try {
+            if (mapdb.containsImei(imeiNumber)) {
+                String token = UUID.randomUUID().toString();
+                mapdb.putToken(token, imeiNumber);
 
-		if(mapdb.containsImei(imeiNumber)){
-			String token = UUID.randomUUID().toString();
-			mapdb.putToken(token, imeiNumber);
-			mapdb.closeDB();
 
-			HashMap<String, Object> data = new HashMap<>();
-			data.put("token", token);
-			data.put("callback", "http://localhost:8080/coffeedream/token");
+                HashMap<String, Object> data = new HashMap<>();
+                data.put("token", token);
+                data.put("callback", "http://localhost:8080/coffeedream/token");
 
-			ResponseAuth resp = new ResponseAuth("auth", data);
-			return Response.ok(resp, MediaType.APPLICATION_JSON).build();
-		}
+                ResponseAuth resp = new ResponseAuth("auth", data);
+                return Response.ok(resp, MediaType.APPLICATION_JSON).build();
+            }
 
-		// 4 - IMEI not found in user database
-		else {
-			mapdb.closeDB();
-			return makeError("auth", "Imei (" + imeiNumber + ") not found in user database");
-		}
-	}
+            // 4 - IMEI not found in user database
+            else {
+
+                return makeError("auth", "Imei (" + imeiNumber + ") not found in user database");
+            }
+        }finally {
+            mapdb.closeDB();
+        }
+    }
 
 	@POST
 	@Path("/token")
@@ -106,24 +111,26 @@ public class AuthService {
 
 		// 3 - Token found in database
 		MapDBStorage mapdb = new MapDBStorage();
+        try {
+            if (mapdb.containsToken(tokenNumber)) {
+                UserBean user = mapdb.getUserByToken(tokenNumber);
 
-		if(mapdb.containsToken(tokenNumber)){
-			UserBean user = mapdb.getUserByToken(tokenNumber);
-			mapdb.closeDB();
+                HashMap<String, Object> data = new HashMap<>();
+                data.put("user", user);
 
-			HashMap<String, Object> data = new HashMap<>();
-			data.put("user", user);
+                ResponseAuth resp = new ResponseAuth("token", data);
+                return Response.ok(resp, MediaType.APPLICATION_JSON).build();
+            }
 
-			ResponseAuth resp = new ResponseAuth("token", data);
-			return Response.ok(resp, MediaType.APPLICATION_JSON).build();
-		}
+            // 4 - Token not found in database
+            else {
 
-		// 4 - Token not found in database
-		else {
-			mapdb.closeDB();
-			return makeError("token", "Token (" + tokenNumber + ") not from this server.");
-		}
-	}
+                return makeError("token", "Token (" + tokenNumber + ") not from this server.");
+            }
+        }finally {
+            mapdb.closeDB();
+        }
+    }
 
 	private Response makeError(String caller, String message){
 		HashMap<String, Object> data = new HashMap<>();
