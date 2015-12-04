@@ -12,39 +12,27 @@ import java.util.UUID;
 @Path("")
 public class AuthService {
 
-
-    @POST
+    @GET
     @Path("/alimentation")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     public void alimentation() {
 
         MapDBStorage mapdb = new MapDBStorage();
 
         //alimentation de la table d'identities
-    try {
-        UserBean u1 = new UserBean("0600000001", "John", "Doe");
-        UserBean u2 = new UserBean("0600000002", "jacky", "chan");
-        UserBean u3 = new UserBean("0600000003", "TITI", "TITI");
-        UserBean u4 = new UserBean("0600000004", "TYTY", "TYTY");
-        UserBean u5 = new UserBean("0600000005", "TOTOR", "TOTOR");
 
-        String imei1 = "123456789012345";
-        String imei2 = "345678901234567";
-        String imei3 = "234567890123456";
-        String imei4 = "678901234566789";
-        String imei5 = "098765432112345";
+        try {
 
-        mapdb.putUser(imei1, u1);
-        mapdb.putUser(imei2, u2);
-        mapdb.putUser(imei3, u3);
-        mapdb.putUser(imei4, u4);
-        mapdb.putUser(imei5, u5);
+            mapdb.putUser("123456789012345", new UserBean("0600000001","John", "Doe"));
+            mapdb.putUser("345678901234567", new UserBean("0600000002","Jacky", "Chan"));
+            mapdb.putUser("234567890123456", new UserBean("0600000003","Bruce", "Wayne"));
+            mapdb.putUser("678901234566789", new UserBean("0600000004","Jack", "Sparrow"));
+            mapdb.putUser("098765432112345", new UserBean("0600000005","Jean-Pierre", "Foucault"));
+            mapdb.putUser("987654321123456", new UserBean("0600000005","Mary", "Poppins"));
 
-    } finally {
-        mapdb.closeDB();
-    }
+        } finally {
+            mapdb.closeDB();
 
+        }
     }
 
 	@POST
