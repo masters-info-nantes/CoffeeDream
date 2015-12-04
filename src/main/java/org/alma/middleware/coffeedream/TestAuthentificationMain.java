@@ -26,14 +26,15 @@ public class TestAuthentificationMain {
 
 
         /**
-         * alimentation de la base
+         * Création et alimentation de la base
+         *
          */
-//        HttpPost requestAlimentation = new HttpPost("http://localhost:8080/coffeedream/alimentation");
-//        requestAlimentation.setHeader("accpet","application/json");
-//
-//        CloseableHttpResponse response = httpClient.execute(requestAlimentation);
-//
-//        System.out.println(response);
+        HttpPost requestAlimentation = new HttpPost("http://localhost:8080/coffeedream/alimentation");
+        requestAlimentation.setHeader("accpet","application/json");
+
+        CloseableHttpResponse response = httpClient.execute(requestAlimentation);
+
+        System.out.println(response);
 
 
         /**
