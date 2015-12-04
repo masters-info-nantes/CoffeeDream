@@ -64,7 +64,7 @@ public class AuthService {
 
                 HashMap<String, Object> data = new HashMap<>();
                 data.put("token", token);
-                data.put("callback", "http://localhost:8080/coffeedream/token");
+                data.put("callback", "http://localhost:8080/callback");
 
                 ResponseAuth resp = new ResponseAuth("auth", data);
                 return Response.ok(resp, MediaType.APPLICATION_JSON).build();
