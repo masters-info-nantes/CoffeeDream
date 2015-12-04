@@ -6,6 +6,7 @@ import org.mapdb.DBMaker;
 import org.mapdb.Serializer;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -18,7 +19,8 @@ public class MapDBStorage {
     private Map<String,String> authents;
     private Map<String,UserBean> identities;
 
-    public MapDBStorage() {
+    public MapDBStorage() throws IOException {
+
         database = DBMaker.fileDB(new File("mapdb/authentification.db"))
                 .transactionDisable()
                 .make();

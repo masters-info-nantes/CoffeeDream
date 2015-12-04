@@ -30,7 +30,8 @@ public class TestAuthentificationMain {
          *
          */
         HttpPost requestAlimentation = new HttpPost("http://localhost:8080/coffeedream/alimentation");
-        requestAlimentation.setHeader("accpet","application/json");
+        requestAlimentation.setHeader("Content-type","application/json");
+        requestAlimentation.setHeader("Accept","application/json");
 
         CloseableHttpResponse response = httpClient.execute(requestAlimentation);
 

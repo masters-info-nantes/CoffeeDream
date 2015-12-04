@@ -5,6 +5,7 @@ import org.alma.middleware.coffeedream.Bean.UserBean;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -14,7 +15,7 @@ public class AuthService {
 
     @GET
     @Path("/alimentation")
-    public void alimentation() {
+    public void alimentation() throws IOException {
 
         MapDBStorage mapdb = new MapDBStorage();
 
@@ -39,7 +40,7 @@ public class AuthService {
 	@Path("/auth")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response auth(HashMap<String, Object> request){
+	public Response auth(HashMap<String, Object> request) throws IOException {
 
 		// 1 - No IMEI in request
 		if(!request.containsKey("imei")){
@@ -83,7 +84,7 @@ public class AuthService {
 	@Path("/token")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response token(HashMap<String, Object> request){
+	public Response token(HashMap<String, Object> request) throws IOException {
 
 		// 1 - No Token in request
 		if(!request.containsKey("token")){
