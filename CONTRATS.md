@@ -7,8 +7,10 @@ l'insertion des données sera faite directement dans le code (pas d'url rest pou
 ```
 POST http://coffeedream.com/auth
 IN
-	imei (number)
-	Imei number of the cell phone used to generate a token	
+	imei (json)
+	Imei number of the cell phone used to generate a token	{
+		"imei": "0600000001"
+	}
 	
 POSSIBLE OUT :
 OUT
@@ -17,7 +19,7 @@ OUT
 	{
 		"call":"auth"
 		"answer": {
-			"token": "OJOJOIJLKIOOH"
+			"token": "577e54b1-22b6-4538-b66e-58e8ab67b188"
 			"callback": "http://coffeedream.com/token/"
 		}
 	}
@@ -28,7 +30,7 @@ OUT
 	{
 		"call":"auth"
 		"answer": {
-			"error" : "Token not found for this IMEI"
+			"error" : "Imei (763524272469643) not found in user database"
 		}	
 	}
 OUT	
@@ -37,7 +39,7 @@ OUT
 	{
 		"call":"auth"
 		"answer": {
-			"error" : "IMEI MAL FORMED"
+			"error" : "Imei (76352427) malformed. It contains 8 characters instead of 15."
 		}	
 	}
 
@@ -46,22 +48,26 @@ OUT
 ```
 POST http://coffeedream.com/token
 IN
-	token (string)
+	token (json)
 	Retrieved wih the auth call
-
+	{
+		"token": "fe7409af-4b4f-4b66-8eef-441a6a73cce5"
+	}
+	
 POSSIBLE OUT :
 
 OUT
 	user (json)
 	returne the user
 	{
-		"call":"token"
-		"answer": {
-		
-			"id": 1,	
-			"firstname": "John",			
-			"name": "Doe"
-		}
+    	"call": "token",
+    	"answer": {
+        	"user": {
+            	"phoneNumber": "0600000002",
+            	"firstName": "John",
+            	"lastName": "Doe"
+        	}
+    	}
 	}
 OUT	
 	error (json)
@@ -69,7 +75,7 @@ OUT
 	{
 		"call" :"token"
 		"answer": {
-			"error": "token not found"
+			"error": "Token (fe7409af-4b4f-8b66-8eef-441a6a73cce5) not from this server."
 		}
 	}
 OUT	
@@ -78,7 +84,7 @@ OUT
 	{
 		"call":"auth"
 		"answer": {
-			"error" : "Token not found for this IMEI"
+			"error" : "Token (fe7409af-44b66-8eef-441a6a73cce5) malformed."
 		}	
 	}
 		

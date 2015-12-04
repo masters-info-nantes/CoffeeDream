@@ -8,86 +8,19 @@
 
 ```
 $ mvn clean compile tomcat:run
-$ browser http://localhost:8080/coffeedream/test
+$ browser http://localhost:8080/coffeedream/alimentation
 ```
 
 ## ReST API  
-```
-POST http://coffeedream.com/auth
-IN
-	imei (number)
-	Imei number of the cell phone used to generate a token	
-	
-POSSIBLE OUT :
-OUT
-	token (json)
-	Token is used to get an authenticated user
-	{
-		"call":"auth"
-		"answer": {
-			"token": "OJOJOIJLKIOOH"
-			"callback": "http://coffeedream.com/token/"
-		}
-	}
+[See full contract](https://github.com/masters-info-nantes/CoffeeDream/blob/master/CONTRATS.md)
 
-OUT	
-	error(json)
-	Error returned if any token is found
-	{
-		"call":"auth"
-		"answer": {
-			"error" : "Token not found for this IMEI"
-		}	
-	}
-OUT	
-	error(json)
-	Error returned if any IMEI mal formed ( <15 digits)
-	{
-		"call":"auth"
-		"answer": {
-			"error" : "IMEI MAL FORMED"
-		}	
-	}
+## Users in database
 
-```	
-
-```
-POST http://coffeedream.com/token
-IN
-	token (string)
-	Retrieved wih the auth call
-
-POSSIBLE OUT :
-
-OUT
-	user (json)
-	returne the user
-	{
-		"call":"token"
-		"answer": {
-		
-			"id": 1,	
-			"firstname": "John",			
-			"name": "Doe"
-		}
-	}
-OUT	
-	error (json)
-	Error returned if token not found
-	{
-		"call" :"token"
-		"answer": {
-			"error": "token not found"
-		}
-	}
-OUT	
-	error(json)
-	Error returned if token malformed  is found
-	{
-		"call":"auth"
-		"answer": {
-			"error" : "Token not found for this IMEI"
-		}	
-	}
-		
-```
+| IMEI | PhoneNumber | FirstName | LastName |
+|-|-|-|-|
+| 123456789012345  | 0600000001 | John | Doe |
+| 345678901234567 | 0600000002 | Jacky | Chan |
+| 234567890123456 | 0600000003 | Bruce | Wayne |
+| 678901234566789 | 0600000004 | Jack | Sparrow |
+| 098765432112345 | 0600000005 | Jean-Pierre | Foucault |
+| 987654321123456 | 0600000005 | Mary | Poppins |
