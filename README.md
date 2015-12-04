@@ -17,7 +17,7 @@ $ browser http://localhost:8080/coffeedream/alimentation
 ## Users in database
 
 | IMEI | PhoneNumber | FirstName | LastName |
-|-|-|-|-|
+|:-:|:-:|:-:|:-:|
 | 123456789012345  | 0600000001 | John | Doe |
 | 345678901234567 | 0600000002 | Jacky | Chan |
 | 234567890123456 | 0600000003 | Bruce | Wayne |
