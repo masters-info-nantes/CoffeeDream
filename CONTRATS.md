@@ -5,7 +5,7 @@ Stockage : MapDB pour le stockage des (IMEI,TOKEN) et (TOKEN,USERINFOS)
 l'insertion des données sera faite directement dans le code (pas d'url rest pour l'insertion).
 
 ```
-POST http://coffeedream.com/auth
+POST http://localhost:8080/auth
 IN
 	imei (json)
 	Imei number of the cell phone used to generate a token	{
@@ -20,7 +20,7 @@ OUT
 		"call":"auth"
 		"answer": {
 			"token": "577e54b1-22b6-4538-b66e-58e8ab67b188"
-			"callback": "http://coffeedream.com/token/"
+			"callback": "http://localhost:8080/coffeedream/token"
 		}
 	}
 
@@ -46,7 +46,7 @@ OUT
 ```	
 
 ```
-POST http://coffeedream.com/token
+POST http://localhost:8080/coffeedream/token
 IN
 	token (json)
 	Retrieved wih the auth call
