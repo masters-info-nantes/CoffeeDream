@@ -56,10 +56,10 @@ public class TestAuthentificationMain {
         requestAuth.setEntity(new StringEntity(jsonParam.toString(), "UTF-8"));
 
         // Execution de la requête
-        CloseableHttpResponse response = httpClient.execute(requestAuth);
+        CloseableHttpResponse authresponse = httpClient.execute(requestAuth);
 
         // Affichage des données de la réponse (statusCode + headers)
-        System.out.println(response);
+        System.out.println(authresponse);
 
         // Récupération d'une valeur dans les headers
         Header header = response.getFirstHeader("Content-Type");
