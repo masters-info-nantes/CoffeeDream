@@ -30,8 +30,6 @@ public class TestAuthentificationMain {
          *
          */
         HttpPost requestAlimentation = new HttpPost("http://localhost:8080/coffeedream/alimentation");
-        requestAlimentation.setHeader("Content-type","application/json");
-        requestAlimentation.setHeader("Accept","application/json");
 
         CloseableHttpResponse response = httpClient.execute(requestAlimentation);
 
@@ -63,11 +61,11 @@ public class TestAuthentificationMain {
         System.out.println(authresponse);
 
         // Récupération d'une valeur dans les headers
-        Header header = response.getFirstHeader("Content-Type");
+        Header header = authresponse.getFirstHeader("Content-Type");
         System.out.println(header.getValue());
 
         // Affichage du contenu de la réponse
-        String authResponse = getContextAsString(response);
+        String authResponse = getContextAsString(authresponse);
         System.out.println(authResponse);
 
         // Récupération du token pour la prochaine requête
@@ -89,17 +87,17 @@ public class TestAuthentificationMain {
         requestToken.setEntity(new StringEntity(jsonParam.toString(), "UTF-8"));
 
         // Execution de la requête
-        response = httpClient.execute(requestToken);
+        CloseableHttpResponse httpTokenResponse = httpClient.execute(requestToken);
 
         // Affichage des données de la réponse (statusCode + headers)
-        System.out.println(response);
+        System.out.println(httpTokenResponse);
 
         // Récupération d'une valeur dans les headers
-        header = response.getFirstHeader("Content-Type");
+        header = httpTokenResponse.getFirstHeader("Content-Type");
         System.out.println(header.getValue());
 
         // Affichage du contenu de la réponse
-        String tokenResponse = getContextAsString(response);
+        String tokenResponse = getContextAsString(httpTokenResponse);
         System.out.println(tokenResponse);
 
 

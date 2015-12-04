@@ -13,7 +13,7 @@ import java.util.UUID;
 @Path("")
 public class AuthService {
 
-    @GET
+    @POST
     @Path("/alimentation")
     public void alimentation() throws IOException {
 
